@@ -5,8 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FriendOrganizer.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" FontSize="20">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView
+            ItemsSource="{Binding Friends}"
+            SelectedItem="{Binding SelectedFriend,Mode=TwoWay}"
+            DisplayMemberPath="FirstName"
+            />
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition  />
+            </Grid.RowDefinitions>
+
+            <Label 
+                Content="First name"
+                Margin="10 0"
+                />
+
+            <TextBox
+                Grid.Row="1"
+                Margin="10 0 10 10"
+                Text="{Binding SelectedFriend.FirstName,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"
+                />
+
+            <Label
+                Grid.Row="2"
+                Content="Last name"
+                Margin="10 0"
+                />
+
+            <TextBox
+                Grid.Row="3"
+                Margin="10 0 10 10"
+                Text="{Binding SelectedFriend.LastName,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"
+                />
+
+            <Label
+                Grid.Row="4"
+                Margin="10 0"
+                Content="Email"
+                
+                />
+
+            <TextBox
+                Grid.Row="5"
+                Margin="10 0 10 10"
+                Text="{Binding SelectedFriend.Email,
+                Mode=TwoWay,
+                UpdateSourceTrigger=PropertyChanged}"
+                
+                />
+        </Grid>
     </Grid>
 </Window>
