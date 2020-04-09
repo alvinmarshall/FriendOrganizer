@@ -1,15 +1,25 @@
-﻿using FriendOrganizer.Model;
+﻿using FriendOrganizer.DataAccess;
+using FriendOrganizer.Model;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FriendOrganizer.UI.Data
 {
     public class DataService : IDataService
     {
+        private Func<DatabaseContext> _contextCreator;
+
+        public DataService(Func<DatabaseContext> contextCreator )
+        {
+            _contextCreator = contextCreator;
+        }
         public IEnumerable<Friend> GetAll()
         {
-            yield return new Friend { FirstName = "f1", LastName = "l1", Email = "e1" };
-            yield return new Friend { FirstName = "f2", LastName = "l2", Email = "e2" };
-            yield return new Friend { FirstName = "f3", LastName = "l3", Email = "e3" };
+            using (var ctx = _contextCreator())
+            {
+                return ctx.Friends.AsNoTracking().ToList();
+            }
         }
 
     }
